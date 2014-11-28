@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :authenticate_user!,
+    :only => [:create, :new]
   def new
   end
   def create
