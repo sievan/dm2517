@@ -13,6 +13,10 @@ class ArticlesController < ApplicationController
   end
   def index
     @articles = Article.all
+    xml = (Nokogiri::XML (render_to_string 'index'))
+    xslt =  Nokogiri::XSLT(File.read('app/assets/stylesheets/articles.xsl'))
+    xml.to_html
+    render text: xslt.transform(xml).to_html
   end
   private
   def article_params
