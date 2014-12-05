@@ -3,6 +3,19 @@ class ArticlesController < ApplicationController
     :only => [:create, :new]
   def new
   end
+  def edit
+    @article = Article.find(params[:id])
+    puts render_to_string('edit')
+    render 'edit'
+  end
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render 'edit'
+    end
+  end
   def create
     @article = Article.new(article_params)
     @article.save
