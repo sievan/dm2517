@@ -5,8 +5,8 @@ class ArticlesController < ApplicationController
   end
   def edit
     @article = Article.find(params[:id])
-    puts render_to_string('edit')
-    render 'edit'
+    @data = render_to_string('edit', :formats => [:xml])
+    render 'edit', :formats => [:html]
   end
   def update
     @article = Article.find(params[:id])
