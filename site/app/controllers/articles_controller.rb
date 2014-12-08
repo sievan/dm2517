@@ -1,11 +1,17 @@
 class ArticlesController < ApplicationController
+  include XmlHelper
   before_action :authenticate_user!,
     :only => [:create, :new]
   def new
   end
   def edit
+    style(nil, nil)
     @article = Article.find(params[:id])
-    @data = render_to_string('edit', :formats => [:xml])
+    xml = Nokogiri::XML render_to_string('edit', :formats => [:xml])
+    puts xml.to_xml
+    xslt = Nokogiri::XSLT(File.read('app/assets/stylesheets/identity.xsl'))
+    @data = xslt.transform(xml).to_html
+    puts @data
     render 'edit', :formats => [:html]
   end
   def update

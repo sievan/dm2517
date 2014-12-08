@@ -1,20 +1,11 @@
 <%= form_for :article, url: article_path(@article), method: :patch do |f| %>
-  <p>
-    <%= f.label :rubrik %><br>
-    <%= f.text_field :title %>
-  </p>
- 
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
 
-  <p>
-    <%= f.label :namn %><br>
+    <%= f.label :rubrik %>
+    <%= f.text_field :title %>
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+    <%= f.label :namn %>
     <%= f.text_field :author %>
-  </p>
- 
-  <p>
     <%= f.submit %>
-  </p>
+
 <% end %>
