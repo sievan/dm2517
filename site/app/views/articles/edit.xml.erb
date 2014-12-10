@@ -1,0 +1,11 @@
+<%= form_for :article, url: article_path(@article), method: :patch do |f| %>
+
+    <%= f.label :rubrik %>
+    <%= f.text_field :title %>
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+    <%= f.label :namn %>
+    <%= f.text_field :author %>
+    <%= f.submit %>
+
+<% end %>
