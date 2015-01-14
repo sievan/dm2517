@@ -12,9 +12,10 @@
     </xsl:copy>
   </xsl:template>
 
-  <xsl:template match="label">
+  <xsl:template match="form">
     <xsl:copy>
       <xsl:copy-of select="@*"/>
+      <div> Editing </div>
       <xsl:apply-templates/>
     </xsl:copy>
   </xsl:template>
