@@ -12,7 +12,18 @@ class WelcomeController < ApplicationController
         end
       }
     end
-    xslt =  Nokogiri::XSLT(File.read('app/assets/stylesheets/articles.xsl'))
+    xslt =  get_xsl "articles"
     @news = xslt.transform(Nokogiri::XML(builder.to_xml)).to_html
+  end
+  private
+  def check_if_mobile
+    request.user_agent =~ /Mobile|webOS/
+  end
+  def get_xsl sheet
+    if check_if_mobile
+      Nokogiri::XSLT(File.read('app/assets/stylesheets/'+sheet+'_m.xsl'))
+    else
+      Nokogiri::XSLT(File.read('app/assets/stylesheets/'+sheet+'.xsl'))
+    end
   end
 end
