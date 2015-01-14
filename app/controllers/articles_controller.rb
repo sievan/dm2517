@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   include XmlHelper
   before_action :authenticate_user!,
-    :only => [:create, :new]
+    :only => [:create, :new, :edit, :update]
   def new
   end
   def edit
