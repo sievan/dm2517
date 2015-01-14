@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     xml = Nokogiri::XML render_to_string('edit', :formats => [:xml])
     puts xml.to_xml
-    xslt = Nokogiri::XSLT(File.read('app/assets/stylesheets/identity.xsl'))
+    xslt = get_xsl "identity"
     @data = xslt.transform(xml).to_html
     puts @data
     render 'edit', :formats => [:html]
@@ -32,9 +32,9 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     xml = Nokogiri::XML render_to_string('show', :formats => [:xml])
     puts xml.to_xml
-    xslt = Nokogiri::XSLT(File.read('app/assets/stylesheets/article.xsl'))
+    xslt = get_xsl "article"
     @data = xslt.transform(xml).to_html
-    puts @data
+    puts '===========+++++++++++++++=========' if check_if_mobile
     render 'show', :formats => [:html]
   end
   def index
@@ -47,5 +47,15 @@ class ArticlesController < ApplicationController
   private
   def article_params
     params.require(:article).permit(:title, :text, :author)
+  end
+  def check_if_mobile
+    request.user_agent =~ /Mobile|webOS/
+  end
+  def get_xsl sheet
+    if check_if_mobile
+      Nokogiri::XSLT(File.read('app/assets/stylesheets/'+sheet+'_m.xsl'))
+    else
+      Nokogiri::XSLT(File.read('app/assets/stylesheets/'+sheet+'.xsl'))
+    end
   end
 end
