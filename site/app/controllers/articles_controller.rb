@@ -28,7 +28,14 @@ class ArticlesController < ApplicationController
     redirect_to @article
   end
   def show
+    style(nil, nil)
     @article = Article.find(params[:id])
+    xml = Nokogiri::XML render_to_string('show', :formats => [:xml])
+    puts xml.to_xml
+    xslt = Nokogiri::XSLT(File.read('app/assets/stylesheets/article.xsl'))
+    @data = xslt.transform(xml).to_html
+    puts @data
+    render 'show', :formats => [:html]
   end
   def index
     @articles = Article.all
