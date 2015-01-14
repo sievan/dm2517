@@ -4,6 +4,7 @@
   <% if user_signed_in? %>
     <li><%= link_to 'Ditt konto', edit_user_registration_path %></li>
     <li><%= link_to "Logga ut", destroy_user_session_path, method: :delete  %></li>
+    <li><%= link_to "Ny artikel", new_article_path %>
   <% else %>
     <li><%= link_to "Registrera dig", new_user_registration_path %></li>
     <li><%= link_to "Logga in", new_user_session_path %></li>

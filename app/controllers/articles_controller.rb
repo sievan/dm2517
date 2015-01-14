@@ -3,6 +3,13 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!,
     :only => [:create, :new, :edit, :update]
   def new
+    style(nil, nil)
+    xml = Nokogiri::XML render_to_string('new', :formats => [:xml])
+    puts xml.to_xml
+    xslt = get_xsl "identity"
+    @data = xslt.transform(xml).to_html
+    puts @data
+    render 'new', :formats => [:html]
   end
   def edit
     style(nil, nil)
