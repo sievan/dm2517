@@ -34,7 +34,6 @@ class ArticlesController < ApplicationController
     puts xml.to_xml
     xslt = get_xsl "article"
     @data = xslt.transform(xml).to_html
-    puts '===========+++++++++++++++=========' if check_if_mobile
     render 'show', :formats => [:html]
   end
   def index
