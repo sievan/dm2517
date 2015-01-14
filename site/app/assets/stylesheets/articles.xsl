@@ -9,6 +9,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <div class="article">
         <div><h3><xsl:value-of select="title"/></h3></div>
         <div><xsl:value-of select="content"/></div>
+        <xsl:value-of select="edit" disable-output-escaping="yes"/>
       </div>
     </xsl:for-each>
 </xsl:template>

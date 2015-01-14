@@ -8,6 +8,7 @@ class WelcomeController < ApplicationController
           xml.title(article.title)
           xml.content(article.text)
           xml.author(article.author)
+          xml.edit(view_context.link_to("Edit", edit_article_path(article)))
         }
         end
       }
